@@ -73,6 +73,7 @@ extern const IntCtrl_Ip_CtrlConfigType IntCtrlConfig_0;
 
 /* Declaration of the ISR Handlers */
 extern void LPUART_UART_IP_6_IRQHandler(void);
+extern void PIT_0_ISR(void);
 
 #define PLATFORM_STOP_SEC_CONFIG_DATA_UNSPECIFIED
 #include "Platform_MemMap.h"

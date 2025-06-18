@@ -35,6 +35,7 @@
 #include "Lpuart_Uart_Ip_Irq.h"
 #include "Clock_Ip.h"
 #include "IntCtrl_Ip.h"
+#include "Pit_Ip.h"
 #include "string.h"
 
 volatile int exit_code = 0;
@@ -44,9 +45,21 @@ volatile int exit_code = 0;
 #define WELCOME_MSG "Hello, this message is sent via UART!\r\n"
 #define BUFFER_SIZE 50
 
+#define PIT_INST_0 0U
+#define CH_0 0U
+// PIT time-out period - equivalent to 1s
+#define PIT_PERIOD 40000000
+
 // Global buffers
 uint8_t rxBuffer[BUFFER_SIZE];
 uint8_t txBuffer[BUFFER_SIZE];
+volatile uint8_t toggleLed = 0U;
+
+// Pit notification called by the configured channel periodically
+void pit0_callback_handler(void)
+{
+	toggleLed = 1U;
+}
 
 // Simple delay function
 void test_delay(uint32_t delay)
@@ -65,20 +78,19 @@ void test_led(void)
 
     while (count++ < 10)
     {
-        Siul2_Dio_Ip_WritePin(LED_RED_PORT, LED_RED_PIN, 1U);
-        test_delay(480000);
         Siul2_Dio_Ip_WritePin(LED_GREEN_PORT, LED_GREEN_PIN, 1U);
+        test_delay(4800000);
         Siul2_Dio_Ip_WritePin(LED_BLUE_PORT, LED_BLUE_PIN, 1U);
         test_delay(4800000);
-        Siul2_Dio_Ip_WritePin(LED_RED_PORT, LED_RED_PIN, 0U);
-        test_delay(480000);
         Siul2_Dio_Ip_WritePin(LED_GREEN_PORT, LED_GREEN_PIN, 0U);
+        test_delay(4800000);
         Siul2_Dio_Ip_WritePin(LED_BLUE_PORT, LED_BLUE_PIN, 0U);
         test_delay(4800000);
     }
 }
 
-int main(void)
+
+void board_level_init(void)
 {
     // 1. Initialize clock
     Clock_Ip_Init(&Clock_Ip_aClockConfig[0]);
@@ -93,14 +105,26 @@ int main(void)
     // 4. Initialize LPUART6
     Lpuart_Uart_Ip_Init(LPUART_INSTANCE, &Lpuart_Uart_Ip_xHwConfigPB_6);
 
-    // 5. Send welcome message
+    // 5. Initialize PIT
+    Pit_Ip_Init(PIT_INST_0, &PIT_0_InitConfig_PB);
+    Pit_Ip_InitChannel(PIT_INST_0, PIT_0_CH_0);
+    Pit_Ip_EnableChannelInterrupt(PIT_INST_0, CH_0);
+    Pit_Ip_StartChannel(PIT_INST_0, CH_0, PIT_PERIOD);
+}
+
+int main(void)
+{
+
+	board_level_init();
+
+    // Send welcome message
     Lpuart_Uart_Ip_AsyncSend(LPUART_INSTANCE, (const uint8_t *)WELCOME_MSG, strlen(WELCOME_MSG));
 
     // Wait for transmission to complete
     uint32_t bytesRemaining;
     while (Lpuart_Uart_Ip_GetTransmitStatus(LPUART_INSTANCE, &bytesRemaining) == LPUART_UART_IP_STATUS_BUSY);
 
-    // 6. Start asynchronous receive
+    // Start asynchronous receive
     Lpuart_Uart_Ip_AsyncReceive(LPUART_INSTANCE, rxBuffer, BUFFER_SIZE);
 
     // Main loop
@@ -126,6 +150,12 @@ int main(void)
             // Handle errors (e.g., overrun, framing error)
             Lpuart_Uart_Ip_AbortReceivingData(LPUART_INSTANCE);
             Lpuart_Uart_Ip_AsyncReceive(LPUART_INSTANCE, rxBuffer, BUFFER_SIZE);
+        }
+
+        // Toggle the Red LED when the pit notification is called
+        if (toggleLed == 1U) {
+        	Siul2_Dio_Ip_TogglePins(LED_RED_PORT, (1 << LED_RED_PIN));
+        	toggleLed = 0U;
         }
 
         // Blink LEDs to indicate running state

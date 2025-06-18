@@ -70,9 +70,10 @@ extern "C" {
 /* List of configuration for interrupts #1 */
 static const IntCtrl_Ip_IrqConfigType aIrqConfiguration1[] = {
     {LPUART6_IRQn, (boolean)TRUE, 0U, LPUART_UART_IP_6_IRQHandler},
+    {PIT0_IRQn, (boolean)TRUE, 0U, PIT_0_ISR},
 };
 const IntCtrl_Ip_CtrlConfigType IntCtrlConfig_0 = {
-    1U,
+    2U,
     aIrqConfiguration1
 };
 
