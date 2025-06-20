@@ -43,6 +43,31 @@
 #include "test_cmac.h"
 #include "test_led.h"
 
+#define APP_METADATA_MAGIC 0xAABBCCDDU
+#define APP_NAME_MAX_LEN 16U
+#define APP_VERSION_MAX_LEN 12U
+
+typedef struct
+{
+    uint32_t magic;                         // 0x00: Identifier
+    char     app_name[APP_NAME_MAX_LEN];    // 0x04: Null-terminated app name
+    char     version[APP_VERSION_MAX_LEN];  // 0x14: Null-terminated version
+    uint32_t build_timestamp;               // 0x20: UNIX time (seconds since epoch)
+    uint32_t flash_start_addr;              // 0x24: App binary flash base address
+    uint32_t image_size;                    // 0x28: Size in bytes for CRC coverage
+    uint32_t crc32;                         // 0x2C: CRC32 over image (excluding metadata)
+} app_metadata_t;
+
+const app_metadata_t app_metadata __attribute__((section(".app_metadata"))) = {
+    .magic = APP_METADATA_MAGIC,
+    .app_name = "MainApp",
+    .version = "v1.2.3",
+    .build_timestamp = 1718860800U,   // e.g., from UNIX time
+    .flash_start_addr = 0x00440000U,  // Example Flash base
+    .image_size = 0x00190000U,        // Example size (App image size)
+    .crc32 = 0U                       // Can be filled by post-build script
+};
+
 // Buffer for log messages
 volatile int exit_code = 0;
 

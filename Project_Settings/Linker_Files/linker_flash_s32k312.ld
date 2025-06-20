@@ -109,6 +109,29 @@ SECTIONS
         KEEP(*(.zero_table))
     } > int_pflash
 
+	/* -------------------------------------------------------------------------------------------------
+	 * Reserve a fixed location at the end of PFlash (0x005CFFF0) for application metadata.
+	 *
+	 * This address is chosen for the following reasons:
+	 *  - It is within the last 4KB page of the application image Flash region.
+	 *  - The section is small (typically < 64 bytes) and does not require a full Flash page.
+	 *  - By placing metadata at a fixed known address, the Bootloader can easily locate and read it
+	 *    without parsing ELF symbols or relying on dynamic linking.
+	 *
+	 * Typical metadata stored here includes:
+	 *  - A magic number for validation
+	 *  - Application version string
+	 *  - Optional fields like CRC, timestamp, etc.
+	 *
+	 * WARNING:
+	 *  - Ensure this region does not overlap with code or data sections.
+	 *  - This location must remain fixed across builds to ensure compatibility with the Bootloader.
+	 * ------------------------------------------------------------------------------------------------- */
+	.app_metadata 0x005CFFF0 : ALIGN(4)
+	{
+	    KEEP(*(.app_metadata))
+	} > int_pflash
+	
     . = ALIGN(4);
     __text_end = .;
     __sram_data_rom = __text_end;
