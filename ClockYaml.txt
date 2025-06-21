@@ -45,7 +45,7 @@ outputs:
 - {id: FLEXCAN5_CLK.outFreq, value: 24 MHz}
 - {id: FLEXCANA_CLK.outFreq, value: 24 MHz}
 - {id: FLEXCANB_CLK.outFreq, value: 24 MHz}
-- {id: FLEXIO0_CLK.outFreq, value: 60 MHz}
+- {id: FLEXIO0_CLK.outFreq, value: 120 MHz}
 - {id: FXOSCOUT.outFreq, value: 16 MHz}
 - {id: HSE_CLK.outFreq, value: 60 MHz}
 - {id: INTM_CLK.outFreq, value: 60 MHz}

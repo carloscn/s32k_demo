@@ -209,7 +209,7 @@
                   <clock_output id="FLEXCAN5_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
                   <clock_output id="FLEXCANA_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
                   <clock_output id="FLEXCANB_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
-                  <clock_output id="FLEXIO0_CLK.outFreq" value="60 MHz" locked="false" accuracy=""/>
+                  <clock_output id="FLEXIO0_CLK.outFreq" value="120 MHz" locked="false" accuracy=""/>
                   <clock_output id="FXOSCOUT.outFreq" value="16 MHz" locked="false" accuracy=""/>
                   <clock_output id="HSE_CLK.outFreq" value="60 MHz" locked="false" accuracy=""/>
                   <clock_output id="INTM_CLK.outFreq" value="60 MHz" locked="false" accuracy=""/>
@@ -385,6 +385,7 @@
             </dependency>
          </dependencies>
          <generated_project_files>
+            <file path="generate/include/DeviceDefinition.h" update_enabled="true"/>
             <file path="generate/include/IntCtrl_Ip_Cfg.h" update_enabled="true"/>
             <file path="generate/include/IntCtrl_Ip_CfgDefines.h" update_enabled="true"/>
             <file path="generate/include/Lpuart_Uart_Ip_Cfg.h" update_enabled="true"/>
@@ -427,7 +428,9 @@
                            <setting name="OsIfDevErrorDetect" value="true"/>
                            <setting name="OsIfUseSystemTimer" value="false"/>
                            <setting name="OsIfUseCustomTimer" value="false"/>
+                           <setting name="OsIfUseGetUserId" value="GET_CORE_ID"/>
                            <setting name="OsIfInstanceId" value="255"/>
+                           <setting name="OsIfGetPhysicalCoreIdEnable" value="false"/>
                            <struct name="OsIfOperatingSystemType">
                               <setting name="Name" value="OsIfOperatingSystemType"/>
                               <setting name="Choice" value="OsIfBaremetalType"/>
