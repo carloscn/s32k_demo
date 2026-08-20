@@ -48,6 +48,14 @@
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/generate\include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/generate\src&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/mbedtls_hse/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/mbedtls_hse/3rdparty_nxp_hse/include/config&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/mbedtls_hse/3rdparty_nxp_hse/include/alt_layer&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/mbedtls_hse/3rdparty_nxp_hse/include/custom_layer&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/mbedtls_hse/nxp_hse_al_hse_dal/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/mbedtls_hse/nxp_hse_al_keystore_mgmt/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/mbedtls_hse/nxp_common/inc&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/mbedtls_hse/nxp_common/hse_interface&quot;"/>
 								</option>
 								<option id="com.nxp.s32ds.cle.arm.mbs.arm32.bare.tool.c.compiler.option.target.mcpu.479915515" name="Arm family" superClass="com.nxp.s32ds.cle.arm.mbs.arm32.bare.tool.c.compiler.option.target.mcpu" useByScannerDiscovery="true" value="com.nxp.s32ds.cle.arm.mbs.arm32.bare.tool.c.compiler.option.target.mcpu.cortex-m7" valueType="enumerated"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.preprocessor.def.symbols.964908517" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
@@ -60,6 +68,7 @@
 									<listOptionValue builtIn="false" value="S32K312"/>
 									<listOptionValue builtIn="false" value="CPU_S32K312"/>
 									<listOptionValue builtIn="false" value="CPU_CORTEX_M7"/>
+									<listOptionValue builtIn="false" value="MBEDTLS_CONFIG_FILE=&lt;nxp_hse_config.h&gt;"/>
 								</option>
 								<option id="com.nxp.s32ds.cle.arm.mbs.arm32.bare.tool.c.compiler.option.target.instructionset.923633712" name="Instruction set" superClass="com.nxp.s32ds.cle.arm.mbs.arm32.bare.tool.c.compiler.option.target.instructionset" useByScannerDiscovery="true" value="com.nxp.s32ds.cle.arm.mbs.arm32.bare.tool.c.compiler.option.target.instructionset.thumb" valueType="enumerated"/>
 								<option id="com.nxp.s32ds.cle.arm.mbs.arm32.bare.tool.c.compiler.option.target.sysroot.1803077657" name="Sysroot" superClass="com.nxp.s32ds.cle.arm.mbs.arm32.bare.tool.c.compiler.option.target.sysroot" useByScannerDiscovery="false" value="--sysroot=&quot;${S32DS_K3_ARM32_GNU_10_2_TOOLCHAIN_DIR}/arm-none-eabi/lib&quot;" valueType="string"/>
@@ -122,10 +131,6 @@
 									<listOptionValue builtIn="false" value="c"/>
 									<listOptionValue builtIn="false" value="m"/>
 									<listOptionValue builtIn="false" value="gcc"/>
-									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value=":libmbedcrypto.a"/>
-								</option>
-								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.link.option.paths.1828312941" name="Library search path (-L)" superClass="gnu.c.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
-									<listOptionValue builtIn="false" value="${ProjDirPath}/lib"/>
 								</option>
 								<option id="com.nxp.s32ds.cle.arm.mbs.arm32.bare.tool.c.linker.option.target.unalignedaccess.762757148" name="Unaligned access" superClass="com.nxp.s32ds.cle.arm.mbs.arm32.bare.tool.c.linker.option.target.unalignedaccess" useByScannerDiscovery="false" value="com.nxp.s32ds.cle.arm.mbs.arm32.bare.option.target.unalignedaccess.default" valueType="enumerated"/>
 								<inputType id="com.freescale.s32ds.cross.gnu.tool.c.linker.inputType.scriptfile.1894655682" superClass="com.freescale.s32ds.cross.gnu.tool.c.linker.inputType.scriptfile"/>
@@ -182,13 +187,13 @@
 					</folderInfo>
 					<sourceEntries>
 						<entry excluding="Linker_Files|Debugger" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Project_Settings"/>
+						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="RTD"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="board"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="generate/include"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="generate/src"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="include"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="lib"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
-						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="RTD"/>
+						<entry excluding="3rdparty_nxp_hse/library/alt_layer/dhm_alt.c|3rdparty_nxp_hse/library/alt_layer/nxp_hse_dhm.c|nxp_common/src/global_variables.c|nxp_common/src/device.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="mbedtls_hse"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -361,13 +366,12 @@
 					</folderInfo>
 					<sourceEntries>
 						<entry excluding="Linker_Files|Debugger" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Project_Settings"/>
+						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="RTD"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="board"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="generate/include"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="generate/src"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="include"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="lib"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
-						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="RTD"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -540,13 +544,12 @@
 					</folderInfo>
 					<sourceEntries>
 						<entry excluding="Linker_Files|Debugger" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Project_Settings"/>
+						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="RTD"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="board"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="generate/include"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="generate/src"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="include"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="lib"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
-						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="RTD"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -719,13 +722,12 @@
 					</folderInfo>
 					<sourceEntries>
 						<entry excluding="Linker_Files|Debugger" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Project_Settings"/>
+						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="RTD"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="board"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="generate/include"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="generate/src"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="include"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="lib"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
-						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="RTD"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -775,9 +777,9 @@
 		<COND_TOOLCHAIN_CUSTOM_OPTION/>
 	</storageModule>
 	<storageModule moduleId="com.nxp.s32ds.cle.uct.internal.core.toolchainScriptProfile">
-		<COND_TOOLCHAIN_COMPONENTS_OPTION>COPY=platform.driver.siul2_dio;platform.driver.pit;platform.driver.clock;platform.driver.osif;platform.driver.lpuart_uart;platform.driver.IntCtrl_Ip;platform.driver.siul2_port</COND_TOOLCHAIN_COMPONENTS_OPTION>
+		<COND_TOOLCHAIN_COMPONENTS_OPTION>COPY=platform.driver.siul2_dio;platform.driver.pit;platform.driver.clock;platform.driver.osif;platform.driver.lpuart_uart;platform.driver.IntCtrl_Ip;platform.driver.siul2_port;platform.driver.cache;platform.driver.Hse</COND_TOOLCHAIN_COMPONENTS_OPTION>
 	</storageModule>
 	<storageModule moduleId="com.nxp.s32ds.cle.uct.core">
-		<sdkComponents>platform.driver.clock;platform.driver.rte_mcu;platform.driver.det;platform.driver.osif;platform.driver.siul2_port;platform.driver.rte_port;platform.driver.siul2_dio;platform.driver.rte_dio;platform.driver.lpuart_uart;platform.driver.rte_uart;platform.driver.IntCtrl_Ip;platform.driver.pit;platform.driver.rte_gpt;platform.driver.pins</sdkComponents>
+		<sdkComponents>platform.driver.clock;platform.driver.rte_mcu;platform.driver.det;platform.driver.osif;platform.driver.siul2_port;platform.driver.rte_port;platform.driver.siul2_dio;platform.driver.rte_dio;platform.driver.lpuart_uart;platform.driver.rte_uart;platform.driver.IntCtrl_Ip;platform.driver.pit;platform.driver.rte_gpt;platform.driver.pins;platform.driver.Hse;platform.driver.rte_crypto;platform.driver.cache;platform.driver.rte_mcl</sdkComponents>
 	</storageModule>
 </cproject>
